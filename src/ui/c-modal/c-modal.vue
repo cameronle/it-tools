@@ -5,16 +5,23 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const props = withDefaults(defineProps<{ open?: boolean; centered?: boolean }>(), {
+const props = withDefaults(defineProps<{
+  open?: boolean
+  centered?: boolean
+  overlayClass?: string
+  teleport?: boolean
+}>(), {
   open: false,
   centered: true,
+  overlayClass: '',
+  teleport: true,
 });
 
 const emit = defineEmits(['update:open']);
 
 const isOpen = useVModel(props, 'open', emit, { passive: true });
 
-const { centered } = toRefs(props);
+const { centered, overlayClass, teleport } = toRefs(props);
 
 function close() {
   isOpen.value = false;
@@ -46,31 +53,58 @@ onClickOutside(modal, () => {
 </script>
 
 <template>
-  <transition>
-    <div v-if="isOpen" class="c-modal--overlay" fixed left-0 top-0 z-10 h-full w-full flex justify-center px-2 :class="{ 'items-center': centered }">
-      <div ref="modal" class="c-modal--container" v-bind="$attrs" max-w-xl w-full flex-grow rounded-md pa-24px>
-        <slot />
+  <Teleport to="body" :disabled="!teleport">
+    <transition name="modal-fade">
+      <div
+        v-if="isOpen"
+        class="c-modal--overlay"
+        :class="[{ 'items-center': centered }, overlayClass]"
+      >
+        <div ref="modal" class="c-modal--container" v-bind="$attrs">
+          <slot />
+        </div>
       </div>
-    </div>
-  </transition>
+    </transition>
+  </Teleport>
 </template>
 
 <style scoped lang="less">
 .c-modal--overlay {
-  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  overflow-y: auto;
 }
 
 .c-modal--container {
   background-color: v-bind('theme.background');
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 36rem;
+  width: 100%;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  margin: auto 0;
 }
 
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.3s ease-in-out;
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.v-enter-from,
-.v-leave-to {
+.modal-fade-enter-from,
+.modal-fade-leave-to {
   opacity: 0;
+  .c-modal--container {
+    transform: scale(0.97);
+  }
 }
 </style>

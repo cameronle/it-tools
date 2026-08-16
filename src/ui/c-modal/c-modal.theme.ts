@@ -1,11 +1,10 @@
 import { defineThemes } from '../theme/theme.models';
-import { appThemes } from '../theme/themes';
 
 export const { useTheme } = defineThemes({
   dark: {
-    background: appThemes.dark.background,
+    background: '#18181b',
   },
   light: {
-    background: appThemes.light.background,
+    background: '#ffffff',
   },
 });

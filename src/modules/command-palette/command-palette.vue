@@ -114,24 +114,43 @@ function activateOption(option: PaletteOption) {
   <div flex-1>
     <c-button w-full important:justify-start @click="isModalOpen = true">
       <span flex items-center gap-3 op-40>
-
         <icon-mdi-search />
         {{ $t('search.label') }}
-
         <span hidden flex-1 border border-current border-op-40 rounded border-solid px-5px py-3px sm:inline>
           {{ isMac ? 'Cmd' : 'Ctrl' }}&nbsp;+&nbsp;K
         </span>
       </span>
     </c-button>
 
-    <c-modal v-model:open="isModalOpen" class="palette-modal" shadow-xl important:max-w-650px important:pa-12px @keydown="handleKeydown">
-      <c-input-text ref="inputRef" v-model:value="searchPrompt" raw-text placeholder="Type to search a tool or a command..." autofocus clearable />
+    <c-modal
+      v-model:open="isModalOpen"
+      :centered="false"
+      class="palette-modal !important:max-w-650px !important:pa-16px"
+      overlay-class="!pt-6 sm:!pt-20 !px-3 sm:!px-4"
+      @keydown="handleKeydown"
+    >
+      <c-input-text
+        ref="inputRef"
+        v-model:value="searchPrompt"
+        raw-text
+        placeholder="Type to search a tool or command..."
+        autofocus
+        clearable
+      />
 
-      <div v-for="(options, category) in filteredSearchResult" :key="category">
-        <div ml-3 mt-3 text-sm text-primary font-bold op-60>
-          {{ category }}
+      <div class="no-scrollbar mt-3 max-h-60vh overflow-y-auto">
+        <div v-for="(options, category) in filteredSearchResult" :key="category" class="mb-2">
+          <div class="mb-1 ml-2 text-11px font-bold tracking-wider text-emerald-500 uppercase op-80">
+            {{ category }}
+          </div>
+          <command-palette-option
+            v-for="option in options"
+            :key="option.name"
+            :option="option"
+            :selected="selectedOptionIndex === getOptionIndex(option)"
+            @activated="activateOption"
+          />
         </div>
-        <command-palette-option v-for="option in options" :key="option.name" :option="option" :selected="selectedOptionIndex === getOptionIndex(option)" @activated="activateOption" />
       </div>
     </c-modal>
   </div>
@@ -139,16 +158,11 @@ function activateOption(option: PaletteOption) {
 
 <style scoped lang="less">
 .c-input-text {
-  font-size: 18px;
+  font-size: 16px;
 
   ::v-deep(.input-wrapper) {
-      padding: 4px;
-      padding-left: 18px;
+    padding: 6px 14px;
+    border-radius: 8px;
   }
-}
-
-.c-modal--overlay {
-  align-items: flex-start !important;
-  padding-top: 80px;
 }
 </style>
