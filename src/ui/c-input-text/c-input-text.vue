@@ -218,6 +218,18 @@ defineExpose({
   &.label-left {
     flex-direction: row;
     align-items: baseline;
+
+    @media (max-width: 640px) {
+      flex-direction: column;
+      align-items: stretch;
+
+      & > .label {
+        flex: 0 0 auto !important;
+        text-align: left !important;
+        padding-right: 0 !important;
+        margin-bottom: 6px;
+      }
+    }
   }
 
   &.error {

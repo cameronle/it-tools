@@ -52,9 +52,9 @@ const { copy } = useCopy({ source: macAddresses, text: 'MAC addresses copied to 
 </script>
 
 <template>
-  <div flex flex-col justify-center gap-2>
-    <div flex items-center>
-      <label w-150px pr-12px text-right> Quantity:</label>
+  <div mx-auto max-w-700px w-full flex flex-col justify-center gap-3>
+    <div flex flex-col gap-1 sm:flex-row sm:items-center>
+      <label w-150px pr-12px text-left text-sm text-neutral-600 font-medium sm:text-right dark:text-neutral-300>Quantity:</label>
       <n-input-number v-model:value="amount" min="1" max="100" flex-1 />
     </div>
 
@@ -87,15 +87,17 @@ const { copy } = useCopy({ source: macAddresses, text: 'MAC addresses copied to 
       label-align="right"
     />
 
-    <c-card mt-5 flex data-test-id="ulids">
-      <pre m-0 m-x-auto>{{ macAddresses }}</pre>
+    <c-card mt-3 flex data-test-id="ulids">
+      <pre m-0 w-full overflow-x-auto text-left text-sm leading-relaxed font-mono>{{ macAddresses }}</pre>
     </c-card>
 
-    <div flex justify-center gap-2>
-      <c-button data-test-id="refresh" @click="refreshMacAddresses()">
+    <div flex flex-col justify-center gap-3 sm:flex-row>
+      <c-button class="flex-1 sm:flex-initial" data-test-id="refresh" @click="refreshMacAddresses()">
+        <icon-mdi:refresh mr-1 text-16px />
         Refresh
       </c-button>
-      <c-button @click="copy()">
+      <c-button class="flex-1 sm:flex-initial" @click="copy()">
+        <icon-mdi:content-copy mr-1 text-16px />
         Copy
       </c-button>
     </div>

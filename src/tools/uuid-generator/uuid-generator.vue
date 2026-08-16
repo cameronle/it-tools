@@ -46,11 +46,11 @@ const { copy } = useCopy({ source: uuids, text: 'UUIDs copied to the clipboard' 
 </script>
 
 <template>
-  <div>
-    <c-buttons-select v-model:value="version" :options="versions" label="UUID version" label-width="100px" mb-2 />
+  <div mx-auto max-w-700px w-full>
+    <c-buttons-select v-model:value="version" :options="versions" label="UUID version:" label-width="110px" mb-3 />
 
-    <div mb-2 flex items-center>
-      <span w-100px>Quantity </span>
+    <div mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3>
+      <span w-110px shrink-0 text-sm text-neutral-600 font-medium dark:text-neutral-300>Quantity:</span>
       <n-input-number v-model:value="count" flex-1 :min="1" :max="50" placeholder="UUID quantity" />
     </div>
 
@@ -64,8 +64,8 @@ const { copy } = useCopy({ source: uuids, text: 'UUIDs copied to the clipboard' 
             OID: '6ba7b812-9dad-11d1-80b4-00c04fd430c8',
             X500: '6ba7b814-9dad-11d1-80b4-00c04fd430c8',
           }"
-          label="Namespace"
-          label-width="100px"
+          label="Namespace:"
+          label-width="110px"
           mb-2
         />
       </div>
@@ -73,9 +73,9 @@ const { copy } = useCopy({ source: uuids, text: 'UUIDs copied to the clipboard' 
         <c-input-text
           v-model:value="v35Args.namespace"
           placeholder="Namespace"
-          label-width="100px"
+          label-width="110px"
           label-position="left"
-          label=" "
+          label="Custom NS:"
           :validation-rules="validUuidRules"
           mb-2
         />
@@ -84,15 +84,14 @@ const { copy } = useCopy({ source: uuids, text: 'UUIDs copied to the clipboard' 
       <c-input-text
         v-model:value="v35Args.name"
         placeholder="Name"
-        label="Name"
-        label-width="100px"
+        label="Name:"
+        label-width="110px"
         label-position="left"
         mb-2
       />
     </div>
 
     <c-input-text
-      style="text-align: center; font-family: monospace"
       :value="uuids"
       multiline
       placeholder="Your uuids"
@@ -105,11 +104,13 @@ const { copy } = useCopy({ source: uuids, text: 'UUIDs copied to the clipboard' 
       class="uuid-display"
     />
 
-    <div flex justify-center gap-3>
-      <c-button autofocus @click="copy()">
+    <div flex flex-col justify-center gap-3 sm:flex-row>
+      <c-button class="flex-1 sm:flex-initial" autofocus @click="copy()">
+        <icon-mdi:content-copy mr-1 text-16px />
         Copy
       </c-button>
-      <c-button @click="refreshUUIDs">
+      <c-button class="flex-1 sm:flex-initial" @click="refreshUUIDs">
+        <icon-mdi:refresh mr-1 text-16px />
         Refresh
       </c-button>
     </div>
@@ -119,7 +120,11 @@ const { copy } = useCopy({ source: uuids, text: 'UUIDs copied to the clipboard' 
 <style scoped lang="less">
 ::v-deep(.uuid-display) {
   textarea {
-    text-align: center;
+    text-align: left;
+    word-break: break-all;
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 10px;
   }
 }
 </style>
