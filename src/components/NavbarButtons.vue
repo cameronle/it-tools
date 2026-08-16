@@ -40,7 +40,7 @@ const { mode } = toRefs(styleStore);
       circle
       variant="text"
       :aria-label="$t('home.nav.mode')"
-      @click="() => styleStore.cycleTheme()"
+      @click="styleStore.cycleTheme"
     >
       <n-icon v-if="mode === 'auto'" size="22" :component="IconDeviceDesktop" />
       <n-icon v-else-if="mode === 'light'" size="24" :component="IconSun" />
