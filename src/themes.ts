@@ -1,11 +1,30 @@
 import type { GlobalThemeOverrides } from 'naive-ui';
 
 export const lightThemeOverrides: GlobalThemeOverrides = {
-  Menu: {
-    itemHeight: '32px',
+  common: {
+    primaryColor: '#10b981',
+    primaryColorHover: '#059669',
+    primaryColorPressed: '#047857',
+    primaryColorSuppl: '#10b981',
+    borderRadius: '8px',
   },
 
-  Layout: { color: '#f1f5f9' },
+  Menu: {
+    itemHeight: '34px',
+    borderRadius: '6px',
+  },
+
+  Layout: {
+    color: '#f8fafc',
+    siderColor: '#ffffff',
+    siderBorderColor: '#e2e8f0',
+  },
+
+  Card: {
+    color: '#ffffff',
+    borderColor: '#e2e8f0',
+    borderRadius: '12px',
+  },
 
   AutoComplete: {
     peers: {
@@ -16,39 +35,45 @@ export const lightThemeOverrides: GlobalThemeOverrides = {
 
 export const darkThemeOverrides: GlobalThemeOverrides = {
   common: {
-    primaryColor: '#1ea54cFF',
-    primaryColorHover: '#36AD6AFF',
-    primaryColorPressed: '#0C7A43FF',
-    primaryColorSuppl: '#36AD6AFF',
+    primaryColor: '#10b981',
+    primaryColorHover: '#34d399',
+    primaryColorPressed: '#059669',
+    primaryColorSuppl: '#34d399',
+    borderRadius: '8px',
+    textColorBase: '#f4f4f5',
+    borderColor: '#27272a',
   },
 
   Notification: {
-    color: '#333333',
+    color: '#18181b',
+    textColor: '#f4f4f5',
   },
 
   AutoComplete: {
     peers: {
-      InternalSelectMenu: { height: '500px', color: '#1e1e1e' },
+      InternalSelectMenu: { height: '500px', color: '#18181b' },
     },
   },
 
   Menu: {
-    itemHeight: '32px',
+    itemHeight: '34px',
+    borderRadius: '6px',
   },
 
   Layout: {
-    color: '#1c1c1c',
-    siderColor: '#232323',
-    siderBorderColor: 'transparent',
+    color: '#09090b',
+    siderColor: '#121215',
+    siderBorderColor: '#27272a',
   },
 
   Card: {
-    color: '#232323',
-    borderColor: '#282828',
+    color: '#18181b',
+    borderColor: '#27272a',
+    borderRadius: '12px',
   },
 
   Table: {
-    tdColor: '#232323',
-    thColor: '#353535',
+    tdColor: '#18181b',
+    thColor: '#27272a',
   },
 };

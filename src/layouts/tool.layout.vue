@@ -34,74 +34,66 @@ const toolDescription = computed<string>(() => t(`tools.${i18nKey.value}.descrip
   <BaseLayout>
     <div class="tool-layout">
       <div class="tool-header">
-        <div flex flex-nowrap items-center justify-between>
-          <n-h1>
+        <div flex items-center justify-between gap-4>
+          <h1 class="tool-title">
             {{ toolTitle }}
-          </n-h1>
+          </h1>
 
-          <div>
-            <FavoriteButton :tool="{ name: route.meta.name, path: route.path } as Tool" />
-          </div>
+          <FavoriteButton :tool="{ name: route.meta.name, path: route.path } as Tool" />
         </div>
 
-        <div class="separator" />
-
-        <div class="description">
+        <div class="tool-description">
           {{ toolDescription }}
         </div>
       </div>
-    </div>
 
-    <div class="tool-content">
-      <slot />
+      <div class="tool-content">
+        <slot />
+      </div>
     </div>
   </BaseLayout>
 </template>
 
 <style lang="less" scoped>
-.tool-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 16px;
-
-  ::v-deep(& > *) {
-    flex: 0 1 600px;
-  }
-}
-
 .tool-layout {
-  max-width: 600px;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 12px;
   box-sizing: border-box;
 
   .tool-header {
-    padding: 40px 0;
+    padding: 24px 0 20px;
     width: 100%;
 
-    .n-h1 {
-      opacity: 0.9;
-      font-size: 40px;
-      font-weight: 400;
+    .tool-title {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
       margin: 0;
-      line-height: 1;
+      line-height: 1.25;
+      color: var(--n-text-color, #18181b);
     }
 
-    .separator {
-      width: 200px;
-      height: 2px;
-      background: rgb(161, 161, 161);
-      opacity: 0.2;
-
-      margin: 10px 0;
+    .tool-description {
+      margin-top: 6px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #71717a;
     }
+  }
 
-    .description {
-      margin: 0;
+  .tool-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 40px;
 
-      opacity: 0.7;
+    ::v-deep(& > *) {
+      flex: 1 1 560px;
+      max-width: 100%;
     }
   }
 }
