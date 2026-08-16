@@ -2,8 +2,12 @@ home:
   categories:
     newestTools: Newest tools
     favoriteTools: 'Your favorite tools'
+    recent: 'Recently used'
     allTools: 'All the tools'
     favoritesDndToolTip: 'Drag and drop to reorder favorites'
+  clearRecent: 'Clear'
+  enterZenMode: 'Zen / Wide mode'
+  exitZenMode: 'Exit Zen mode'
   subtitle: 'Handy tools for developers'
   toggleMenu: 'Toggle menu'
   home: Home

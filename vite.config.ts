@@ -57,15 +57,20 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       strategies: 'generateSW',
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,json,woff,woff2,ttf,eot}'],
+        maximumFileSizeToCacheInBytes: 6 * 1024 * 1024,
+        cleanupOutdatedCaches: true,
+      },
       manifest: {
         name: 'IT Tools',
-        description: 'Aggregated set of useful tools for developers.',
+        short_name: 'IT Tools',
+        description: 'Handy collection of developer tools with great UX.',
         display: 'standalone',
-        lang: 'fr-FR',
         start_url: `${publicBaseUrl}?utm_source=pwa&utm_medium=pwa`,
         orientation: 'any',
-        theme_color: '#18a058',
-        background_color: '#f1f5f9',
+        theme_color: '#10b981',
+        background_color: '#09090b',
         icons: [
           {
             src: '/favicon-16x16.png',
@@ -113,5 +118,32 @@ export default defineConfig({
   },
   build: {
     target: 'esnext',
+    chunkSizeWarningLimit: 1500,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('naive-ui') || id.includes('@vue') || id.includes('/vue/') || id.includes('vue-router') || id.includes('pinia') || id.includes('@vueuse')) {
+              return 'vendor-framework';
+            }
+            if (id.includes('highlight.js')) {
+              return 'vendor-hljs';
+            }
+            if (id.includes('crypto-js') || id.includes('node-forge') || id.includes('bcryptjs')) {
+              return 'vendor-crypto';
+            }
+            if (id.includes('monaco-editor')) {
+              return 'vendor-monaco';
+            }
+            if (id.includes('date-fns') || id.includes('lodash')) {
+              return 'vendor-utils';
+            }
+            if (id.includes('@tiptap') || id.includes('prosemirror')) {
+              return 'vendor-editor';
+            }
+          }
+        },
+      },
+    },
   },
 });

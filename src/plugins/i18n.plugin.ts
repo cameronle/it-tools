@@ -3,11 +3,52 @@ import { get } from '@vueuse/core';
 import type { Plugin } from 'vue';
 import { createI18n } from 'vue-i18n';
 
+function detectInitialLocale(): string {
+  try {
+    const available = messages ? Object.keys(messages) : [];
+    const saved = localStorage.getItem('locale');
+    if (saved && available.includes(saved)) {
+      return saved;
+    }
+
+    const browserLang = window.navigator.language.toLowerCase();
+    if (browserLang.startsWith('zh')) {
+      return 'zh';
+    }
+    const primary = browserLang.split('-')[0];
+    if (available.includes(primary)) {
+      return primary;
+    }
+  }
+  catch (_) {
+  }
+  return 'en';
+}
+
+const initialLocale = detectInitialLocale();
+
 const i18n = createI18n({
   legacy: false,
-  locale: 'en',
+  locale: initialLocale,
+  fallbackLocale: 'en',
   messages,
 });
+
+if (typeof window !== 'undefined') {
+  try {
+    watch(
+      () => get(i18n.global.locale),
+      (newLocale) => {
+        if (newLocale) {
+          localStorage.setItem('locale', newLocale);
+        }
+      },
+      { immediate: true },
+    );
+  }
+  catch (_) {
+  }
+}
 
 export const i18nPlugin: Plugin = {
   install: (app) => {
