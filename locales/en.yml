@@ -28,9 +28,10 @@ home:
     twitterXAccount: 'IT Tools X account'
     about: 'About  IT-Tools'
     aboutLabel: 'About'
+    autoMode: 'System theme'
     darkMode: 'Dark mode'
     lightMode: 'Light mode'
-    mode: 'Toggle dark/light mode'
+    mode: 'Toggle dark/light/system theme'
 about:
   content: >
     # About IT-Tools
