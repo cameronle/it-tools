@@ -304,21 +304,21 @@ function toggleMonthlyDay(day: number) {
     <!-- Main Generator Card -->
     <c-card mb-4>
       <!-- Top Dialect & Language Header -->
-      <div mb-4 flex flex-wrap items-center justify-between gap-3 border-b border-neutral-100 pb-3 dark:border-neutral-800>
-        <div flex items-center gap-2>
+      <div mb-4 flex flex-col gap-3 border-b border-neutral-100 pb-3 sm:flex-row sm:items-center sm:justify-between dark:border-neutral-800>
+        <div flex flex-wrap items-center gap-2.5>
           <span text-xs text-neutral-500 font-semibold tracking-wider uppercase dark:text-neutral-400>
             {{ cronLanguage === 'zh_CN' ? '标准 / 方言 :' : 'Dialect :' }}
           </span>
-          <div class="inline-flex rounded-lg bg-neutral-100 p-0.5 dark:bg-neutral-800">
+          <div class="inline-flex rounded-lg bg-neutral-100 p-1 dark:bg-neutral-800">
             <button
-              class="cursor-pointer rounded-md px-2.5 py-1 text-xs font-medium transition-all"
+              class="cursor-pointer rounded-md px-3 py-1.5 text-xs font-medium transition-all"
               :class="dialect === 'linux' ? 'bg-white dark:bg-neutral-700 text-emerald-600 dark:text-emerald-400 shadow-sm font-semibold' : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'"
               @click="setDialect('linux')"
             >
               Linux / 5位
             </button>
             <button
-              class="cursor-pointer rounded-md px-2.5 py-1 text-xs font-medium transition-all"
+              class="cursor-pointer rounded-md px-3 py-1.5 text-xs font-medium transition-all"
               :class="dialect === 'java' ? 'bg-white dark:bg-neutral-700 text-emerald-600 dark:text-emerald-400 shadow-sm font-semibold' : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white'"
               @click="setDialect('java')"
             >
@@ -327,7 +327,7 @@ function toggleMonthlyDay(day: number) {
           </div>
         </div>
 
-        <div flex items-center gap-2>
+        <div flex items-center justify-between gap-2.5 sm:justify-end>
           <n-radio-group v-model:value="cronLanguage" size="small">
             <n-radio-button value="zh_CN">
               中文
@@ -526,21 +526,21 @@ function toggleMonthlyDay(day: number) {
       </div>
 
       <!-- Central Interactive Cron Expression Display Box -->
-      <div class="my-4 border border-neutral-200 rounded-xl bg-neutral-50 p-4 dark:border-neutral-800 dark:bg-neutral-900">
-        <div mb-1 text-center text-xs text-neutral-400 font-semibold tracking-wider uppercase>
+      <div class="my-4 border border-neutral-200 rounded-xl bg-neutral-50 px-3 py-4 dark:border-neutral-800 dark:bg-neutral-900 sm:px-6">
+        <div mb-1.5 text-center text-xs text-neutral-400 font-semibold tracking-wider uppercase>
           {{ dialect === 'java' ? 'Java / Spring Cron Expression (6-fields)' : 'Standard Linux Cron Expression (5-fields)' }}
         </div>
-        <div class="flex items-center justify-center gap-2">
+        <div class="flex items-center justify-center">
           <input
             v-model="cron"
             type="text"
-            class="max-w-lg w-full border-0 bg-transparent text-center text-26px text-neutral-900 font-bold font-mono outline-none dark:text-white"
+            class="w-full border-0 bg-transparent text-center text-18px text-neutral-900 font-bold tracking-wider font-mono outline-none md:text-26px sm:text-24px dark:text-white"
             placeholder="* * * * *"
             spellcheck="false"
           >
         </div>
 
-        <div class="mt-2 text-center text-base text-emerald-600 font-semibold leading-relaxed dark:text-emerald-400">
+        <div class="mt-2 text-center text-sm text-emerald-600 font-semibold leading-relaxed sm:text-base dark:text-emerald-400">
           {{ cronString }}
         </div>
 
