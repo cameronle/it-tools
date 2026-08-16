@@ -305,11 +305,11 @@ function toggleMonthlyDay(day: number) {
     <c-card mb-4>
       <!-- Top Dialect & Language Header -->
       <div mb-4 flex flex-col gap-4 border-b border-neutral-100 pb-4 sm:flex-row sm:items-center sm:justify-between dark:border-neutral-800>
-        <div class="flex flex-col gap-2.5 sm:flex-row sm:items-center">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
           <span text-xs text-neutral-500 font-semibold tracking-wider uppercase dark:text-neutral-400>
             {{ cronLanguage === 'zh_CN' ? '标准 / 方言 :' : 'Dialect :' }}
           </span>
-          <div class="grid grid-cols-1 w-full gap-2 sm:grid-cols-2 sm:w-auto">
+          <div class="grid grid-cols-1 w-full gap-3 sm:grid-cols-2 sm:w-auto">
             <button
               class="min-h-10 w-full cursor-pointer border rounded-lg px-3 py-2 text-xs font-medium transition-all"
               :class="dialect === 'linux' ? 'border-emerald-500 bg-emerald-500/10 text-emerald-600 shadow-sm dark:bg-emerald-500/20 dark:text-emerald-400 font-semibold' : 'border-neutral-200 bg-white text-neutral-600 hover:border-emerald-400/60 hover:text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-white'"
