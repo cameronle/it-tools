@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { NIcon } from 'naive-ui';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRoute } from 'vue-router';
 import { Home2, Menu2 } from '@vicons/tabler';
 import { storeToRefs } from 'pinia';
 import MenuLayout from '../components/MenuLayout.vue';
@@ -12,6 +12,7 @@ import { useToolStore } from '@/tools/tools.store';
 import CollapsibleToolMenu from '@/components/CollapsibleToolMenu.vue';
 
 const styleStore = useStyleStore();
+const route = useRoute();
 const version = config.app.version;
 const commitSha = config.app.lastCommitSha.slice(0, 7);
 
@@ -24,6 +25,16 @@ const tools = computed<ToolCategory[]>(() => [
   ...(favoriteTools.value.length > 0 ? [{ name: t('tools.categories.favorite-tools'), components: favoriteTools.value }] : []),
   ...toolsByCategory.value,
 ]);
+
+// Auto-collapse sidebar on mobile when navigating to another route
+watch(
+  () => route.path,
+  () => {
+    if (styleStore.isSmallScreen) {
+      styleStore.isMenuCollapsed = true;
+    }
+  },
+);
 </script>
 
 <template>
@@ -140,7 +151,7 @@ const tools = computed<ToolCategory[]>(() => [
   padding: 0 16px;
   text-decoration: none;
   border-bottom: 1px solid rgba(128, 128, 128, 0.1);
-  background: inherit;
+  background-color: var(--n-color, #18181c);
   backdrop-filter: blur(8px);
 
   .brand-logo {
