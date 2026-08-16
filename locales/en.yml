@@ -127,7 +127,10 @@ tools:
 
   crontab-generator:
     title: Crontab generator
-    description: Validate and generate crontab and get the human-readable description of the cron schedule.
+    description: Validate and generate crontab and get human readable description of the cron schedule.
+  curl-converter:
+    title: cURL to code converter
+    description: Convert cURL commands to Python requests, JavaScript fetch, and Go code snippets.
 
   http-status-codes:
     title: HTTP status codes

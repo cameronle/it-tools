@@ -124,8 +124,11 @@ tools:
     description: 使用bcrypt对文本字符串进行哈希和比较。Bcrypt是一个基于Blowfish密码的密码哈希函数。
 
   crontab-generator:
-    title: Crontab 表达式生成
-    description: 验证并生成crontab，并获取cron调度的可读描述。
+    title: Crontab 表达式生成器
+    description: 校验并生成 Crontab 表达式，并获取可读的 Cron 定时调度说明与执行预测。
+  curl-converter:
+    title: cURL 转代码转换器
+    description: 将 cURL 命令快速转换为 Python requests、JavaScript fetch 和 Go 网络请求代码。
 
   http-status-codes:
     title: HTTP 状态码

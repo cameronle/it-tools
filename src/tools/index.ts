@@ -11,7 +11,6 @@ import { tool as xmlToJson } from './xml-to-json';
 import { tool as jsonToXml } from './json-to-xml';
 import { tool as regexTester } from './regex-tester';
 import { tool as regexMemo } from './regex-memo';
-import { tool as markdownToHtml } from './markdown-to-html';
 import { tool as pdfSignatureChecker } from './pdf-signature-checker';
 import { tool as numeronymGenerator } from './numeronym-generator';
 import { tool as macAddressGenerator } from './mac-address-generator';
@@ -87,6 +86,7 @@ import { tool as uuidGenerator } from './uuid-generator';
 import { tool as macAddressLookup } from './mac-address-lookup';
 import { tool as xmlFormatter } from './xml-formatter';
 import { tool as yamlViewer } from './yaml-viewer';
+import { tool as curlConverter } from './curl-converter';
 
 export const toolsByCategory: ToolCategory[] = [
   {
@@ -107,15 +107,16 @@ export const toolsByCategory: ToolCategory[] = [
       textToBinary,
       textToUnicode,
       yamlToJson,
-      yamlToToml,
       jsonToYaml,
-      jsonToToml,
-      listConverter,
-      tomlToJson,
-      tomlToYaml,
+      jsonToCsv,
       xmlToJson,
       jsonToXml,
-      markdownToHtml,
+      yamlToToml,
+      jsonToToml,
+      tomlToYaml,
+      tomlToJson,
+      listConverter,
+      curlConverter,
     ],
   },
   {
