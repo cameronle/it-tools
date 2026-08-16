@@ -98,6 +98,15 @@ const toolDescription = computed<string>(() => t(`tools.${i18nKey.value}.descrip
   &.is-zen {
     max-width: 100%;
     padding: 0 20px;
+
+    .tool-content {
+      ::v-deep(& > *) {
+        max-width: 100% !important;
+      }
+      ::v-deep([class*="max-w-"]) {
+        max-width: 100% !important;
+      }
+    }
   }
 
   .tool-header {

@@ -2,6 +2,7 @@
 import _ from 'lodash';
 import type { UseValidationRule } from '@/composable/validation';
 import CInputText from '@/ui/c-input-text/c-input-text.vue';
+import { useStyleStore } from '@/stores/style.store';
 
 const props = withDefaults(
   defineProps<{
@@ -28,6 +29,7 @@ const { transformer, inputValidationRules, inputLabel, outputLabel, outputLangua
   = toRefs(props);
 
 const inputElement = ref<typeof CInputText>();
+const styleStore = useStyleStore();
 
 const input = ref(inputDefault.value);
 const output = computed(() => transformer.value(input.value));
@@ -65,7 +67,7 @@ function clearInput() {
       ref="inputElement"
       v-model:value="input"
       :placeholder="inputPlaceholder"
-      rows="18"
+      :rows="styleStore.isSmallScreen ? 10 : 18"
       autosize
       raw-text
       multiline

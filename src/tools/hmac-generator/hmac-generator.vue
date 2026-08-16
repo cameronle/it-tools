@@ -42,15 +42,15 @@ const encoding = ref<Encoding>('Hex');
 const hmac = computed(() =>
   formatWithEncoding(algos[hashFunction.value](plainText.value, secret.value), encoding.value),
 );
-const { copy } = useCopy({ source: hmac });
+const { copy, isJustCopied } = useCopy({ source: hmac });
 </script>
 
 <template>
-  <div flex flex-col gap-4>
+  <div mx-auto max-w-800px w-full flex flex-col gap-4>
     <c-input-text v-model:value="plainText" multiline raw-text placeholder="Plain text to compute the hash..." rows="3" autosize autofocus label="Plain text to compute the hash" />
     <c-input-text v-model:value="secret" raw-text placeholder="Enter the secret key..." label="Secret key" clearable />
 
-    <div flex gap-2>
+    <div flex flex-col gap-2 sm:flex-row>
       <c-select
         v-model:value="hashFunction" label="Hashing function"
         flex-1
@@ -83,8 +83,10 @@ const { copy } = useCopy({ source: hmac });
     </div>
     <input-copyable v-model:value="hmac" type="textarea" placeholder="The result of the HMAC..." label="HMAC of your text" />
     <div flex justify-center>
-      <c-button @click="copy()">
-        Copy HMAC
+      <c-button :class="isJustCopied ? '!text-emerald-500' : ''" @click="copy()">
+        <icon-mdi-check v-if="isJustCopied" mr-1 text-16px />
+        <icon-mdi:content-copy v-else mr-1 text-16px />
+        {{ isJustCopied ? 'Copied!' : 'Copy HMAC' }}
       </c-button>
     </div>
   </div>
