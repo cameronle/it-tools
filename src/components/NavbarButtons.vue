@@ -3,24 +3,33 @@ import { IconDeviceDesktop, IconMoon, IconSun } from '@tabler/icons-vue';
 import { useStyleStore } from '@/stores/style.store';
 
 const styleStore = useStyleStore();
-const { mode } = toRefs(styleStore);
+const { mode, isSmallScreen } = toRefs(styleStore);
+
+const currentThemeLabel = computed(() => {
+  if (mode.value === 'auto') {
+    return 'Auto';
+  }
+  return mode.value === 'light' ? 'Light' : 'Dark';
+});
 </script>
 
 <template>
   <c-tooltip
     :tooltip="
-      mode === 'auto'
-        ? `${$t('home.nav.autoMode')} (${styleStore.isDarkTheme ? $t('home.nav.darkMode') : $t('home.nav.lightMode')})`
-        : mode === 'light'
-          ? $t('home.nav.lightMode')
-          : $t('home.nav.darkMode')
+      !isSmallScreen
+        ? mode === 'auto'
+          ? $t('home.nav.autoMode')
+          : mode === 'light'
+            ? $t('home.nav.lightMode')
+            : $t('home.nav.darkMode')
+        : undefined
     "
     position="bottom"
   >
     <c-button
       circle
       variant="text"
-      :aria-label="$t('home.nav.mode')"
+      :aria-label="currentThemeLabel"
       @click="styleStore.cycleTheme"
     >
       <n-icon v-if="mode === 'auto'" size="22" :component="IconDeviceDesktop" />
