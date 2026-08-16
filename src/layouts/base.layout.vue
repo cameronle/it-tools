@@ -1,26 +1,20 @@
 <script lang="ts" setup>
-import { NIcon, useThemeVars } from 'naive-ui';
-
+import { NIcon } from 'naive-ui';
 import { RouterLink } from 'vue-router';
-import { Heart, Home2, Menu2 } from '@vicons/tabler';
-
+import { Home2, Menu2 } from '@vicons/tabler';
 import { storeToRefs } from 'pinia';
-import HeroGradient from '../assets/hero-gradient.svg?component';
 import MenuLayout from '../components/MenuLayout.vue';
 import NavbarButtons from '../components/NavbarButtons.vue';
 import { useStyleStore } from '@/stores/style.store';
 import { config } from '@/config';
 import type { ToolCategory } from '@/tools/tools.types';
 import { useToolStore } from '@/tools/tools.store';
-import { useTracker } from '@/modules/tracker/tracker.services';
 import CollapsibleToolMenu from '@/components/CollapsibleToolMenu.vue';
 
-const themeVars = useThemeVars();
 const styleStore = useStyleStore();
 const version = config.app.version;
 const commitSha = config.app.lastCommitSha.slice(0, 7);
 
-const { tracker } = useTracker();
 const { t } = useI18n();
 
 const toolStore = useToolStore();
@@ -40,8 +34,12 @@ const tools = computed<ToolCategory[]>(() => [
           <icon-mdi:code-tags text-18px />
         </div>
         <div class="brand-info">
-          <div class="brand-title">IT-TOOLS</div>
-          <div class="brand-subtitle">{{ $t('home.subtitle') }}</div>
+          <div class="brand-title">
+            IT-TOOLS
+          </div>
+          <div class="brand-subtitle">
+            {{ $t('home.subtitle') }}
+          </div>
         </div>
       </RouterLink>
 
@@ -100,7 +98,7 @@ const tools = computed<ToolCategory[]>(() => [
           </c-tooltip>
         </div>
 
-        <div flex-1 max-w-lg mx-auto>
+        <div mx-auto max-w-lg flex-1>
           <command-palette />
         </div>
 
