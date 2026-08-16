@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { IconDragDrop, IconHeart } from '@tabler/icons-vue';
+import { IconDragDrop } from '@tabler/icons-vue';
 import { useHead } from '@vueuse/head';
 import { computed } from 'vue';
 import Draggable from 'vuedraggable';
-import ColoredCard from '../components/ColoredCard.vue';
 import ToolCard from '../components/ToolCard.vue';
 import { useToolStore } from '@/tools/tools.store';
-import { config } from '@/config';
 
 const toolStore = useToolStore();
 
@@ -26,7 +24,7 @@ function onUpdateFavoriteTools() {
     <div class="grid-wrapper">
       <transition name="height">
         <div v-if="toolStore.favoriteTools.length > 0">
-          <h3 class="mb-12px mt-16px flex items-center gap-2 text-xs font-semibold text-neutral-500 tracking-wider uppercase dark:text-neutral-400">
+          <h3 class="mb-12px mt-16px flex items-center gap-2 text-xs text-neutral-500 font-semibold tracking-wider uppercase dark:text-neutral-400">
             <span>{{ $t('home.categories.favoriteTools') }}</span>
             <c-tooltip :tooltip="$t('home.categories.favoritesDndToolTip')">
               <n-icon :component="IconDragDrop" size="16" class="cursor-grab text-neutral-400" />
@@ -47,7 +45,7 @@ function onUpdateFavoriteTools() {
       </transition>
 
       <div v-if="toolStore.newTools.length > 0">
-        <h3 class="mb-12px mt-24px text-xs font-semibold text-neutral-500 tracking-wider uppercase dark:text-neutral-400">
+        <h3 class="mb-12px mt-24px text-xs text-neutral-500 font-semibold tracking-wider uppercase dark:text-neutral-400">
           {{ t('home.categories.newestTools') }}
         </h3>
         <div class="grid grid-cols-1 gap-14px lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -55,7 +53,7 @@ function onUpdateFavoriteTools() {
         </div>
       </div>
 
-      <h3 class="mb-12px mt-24px text-xs font-semibold text-neutral-500 tracking-wider uppercase dark:text-neutral-400">
+      <h3 class="mb-12px mt-24px text-xs text-neutral-500 font-semibold tracking-wider uppercase dark:text-neutral-400">
         {{ $t('home.categories.allTools') }}
       </h3>
       <div class="grid grid-cols-1 gap-14px lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2 xl:grid-cols-4">
