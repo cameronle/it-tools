@@ -80,8 +80,8 @@ async function onUpload(file: File) {
 
 <template>
   <c-card title="Base64 to file">
-    <n-grid cols="3" x-gap="12">
-      <n-gi span="2">
+    <n-grid cols="1 s:3" responsive="screen" :x-gap="12" :y-gap="8">
+      <n-gi span="1 s:2">
         <c-input-text
           v-model:value="fileName"
           label="File Name"
@@ -89,7 +89,7 @@ async function onUpload(file: File) {
           mb-2
         />
       </n-gi>
-      <n-gi>
+      <n-gi span="1">
         <c-input-text
           v-model:value="fileExtension"
           label="Extension"

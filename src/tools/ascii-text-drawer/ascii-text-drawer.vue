@@ -53,8 +53,8 @@ const fonts = ['1Row', '3-D', '3D Diagonal', '3D-ASCII', '3x5', '4Max', '5 Line 
 
     <n-divider />
 
-    <n-grid cols="4" x-gap="12" w-full>
-      <n-gi span="2">
+    <n-grid cols="1 s:4" responsive="screen" :x-gap="12" :y-gap="8" w-full>
+      <n-gi span="1 s:2">
         <c-select
           v-model:value="font"
           label-position="top"
@@ -64,7 +64,7 @@ const fonts = ['1Row', '3-D', '3D Diagonal', '3D-ASCII', '3x5', '4Max', '5 Line 
           placeholder="Select font to use"
         />
       </n-gi>
-      <n-gi span="2">
+      <n-gi span="1 s:2">
         <n-form-item label="Width:" label-placement="top" label-width="100" :show-feedback="false">
           <n-input-number v-model:value="width" min="0" max="10000" w-full placeholder="Width of the text" />
         </n-form-item>

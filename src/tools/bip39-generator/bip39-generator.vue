@@ -81,8 +81,8 @@ const { copy: copyPassphrase } = useCopy({ source: passphrase, text: 'Passphrase
 </script>
 
 <template>
-  <div>
-    <n-grid cols="3" x-gap="12">
+  <div mx-auto max-w-800px w-full>
+    <n-grid cols="1 s:3" responsive="screen" :x-gap="12" :y-gap="8">
       <n-gi span="1">
         <c-select
           v-model:value="language"
@@ -91,22 +91,22 @@ const { copy: copyPassphrase } = useCopy({ source: passphrase, text: 'Passphrase
           :options="Object.keys(languages)"
         />
       </n-gi>
-      <n-gi span="2">
+      <n-gi span="1 s:2">
         <n-form-item
           label="Entropy (seed):"
           :feedback="entropyValidation.message"
           :validation-status="entropyValidation.status"
         >
           <n-input-group>
-            <c-input-text v-model:value="entropy" placeholder="Your string..." />
+            <c-input-text v-model:value="entropy" placeholder="Your string..." monospace />
 
             <c-button @click="refreshEntropy()">
-              <n-icon size="22">
+              <n-icon size="20">
                 <Refresh />
               </n-icon>
             </c-button>
             <c-button @click="copyEntropy()">
-              <n-icon size="22">
+              <n-icon size="20">
                 <Copy />
               </n-icon>
             </c-button>

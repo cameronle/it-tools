@@ -26,24 +26,29 @@ const [certs, refreshCerts] = computedRefreshableAsync(
 
 <template>
   <div style="flex: 0 0 100%">
-    <div item-style="flex: 1 1 0" style="max-width: 600px" mx-auto flex gap-3>
-      <n-form-item label="Bits :" v-bind="bitsValidationAttrs as any" label-placement="left" label-width="100">
-        <n-input-number v-model:value="bits" min="256" max="16384" step="8" />
+    <div style="max-width: 600px" mx-auto mb-4 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center>
+      <n-form-item label="Bits :" v-bind="bitsValidationAttrs as any" label-placement="left" label-width="80" :show-feedback="false" flex-1>
+        <n-input-number v-model:value="bits" min="256" max="16384" step="8" w-full />
       </n-form-item>
 
       <c-button @click="refreshCerts">
+        <icon-mdi:refresh mr-1 text-16px />
         Refresh key-pair
       </c-button>
     </div>
   </div>
 
   <div>
-    <h3>Public key</h3>
+    <h3 mb-1 text-sm text-neutral-600 font-medium dark:text-neutral-300>
+      Public key
+    </h3>
     <TextareaCopyable :value="certs.publicKeyPem" />
   </div>
 
   <div>
-    <h3>Private key</h3>
+    <h3 mb-1 text-sm text-neutral-600 font-medium dark:text-neutral-300>
+      Private key
+    </h3>
     <TextareaCopyable :value="certs.privateKeyPem" />
   </div>
 </template>
