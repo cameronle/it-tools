@@ -60,7 +60,10 @@ watch(
         <div class="footer">
           <div mb-3 flex items-center justify-between border-b border-neutral-100 px-3 pb-3 dark:border-neutral-800>
             <span text-xs text-neutral-500 font-medium>{{ $t('home.nav.mode') }}</span>
-            <NavbarButtons />
+            <div flex items-center gap-2>
+              <locale-selector />
+              <NavbarButtons />
+            </div>
           </div>
 
           <div class="text-xs text-neutral-400 dark:text-neutral-500">

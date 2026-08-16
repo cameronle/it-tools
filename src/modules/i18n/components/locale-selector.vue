@@ -3,6 +3,7 @@ const { availableLocales, locale } = useI18n();
 
 const localesLong: Record<string, string> = {
   en: 'English',
+  zh: '中文',
   de: 'Deutsch',
   es: 'Español',
   fr: 'Français',
@@ -10,23 +11,44 @@ const localesLong: Record<string, string> = {
   pt: 'Português',
   ru: 'Русский',
   uk: 'Українська',
-  zh: '中文',
   vi: 'Tiếng Việt',
 };
 
-const localeOptions = computed(() =>
-  availableLocales.map(locale => ({
-    label: localesLong[locale] ?? locale,
-    value: locale,
+const dropdownOptions = computed(() =>
+  availableLocales.map(key => ({
+    label: localesLong[key] ?? key,
+    key,
   })),
 );
+
+function handleSelect(key: string) {
+  locale.value = key;
+}
 </script>
 
 <template>
-  <c-select
-    v-model:value="locale"
-    :options="localeOptions"
-    placeholder="Select a language"
-    w-100px
-  />
+  <n-dropdown
+    trigger="click"
+    :options="dropdownOptions"
+    placement="bottom-end"
+    @select="handleSelect"
+  >
+    <c-button
+      circle
+      variant="text"
+      aria-label="Select language"
+      class="locale-btn"
+    >
+      <icon-mdi:translate text-20px />
+    </c-button>
+  </n-dropdown>
 </template>
+
+<style scoped lang="less">
+.locale-btn {
+  color: var(--n-text-color, #71717a);
+  &:hover {
+    color: #10b981;
+  }
+}
+</style>
