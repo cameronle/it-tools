@@ -55,17 +55,14 @@ watch(
       </RouterLink>
 
       <div class="sider-content">
-        <div v-if="styleStore.isSmallScreen" flex flex-col items-center px-4 pb-2>
-          <locale-selector w="100%" mb-2 />
-
-          <div flex justify-center>
-            <NavbarButtons />
-          </div>
-        </div>
-
         <CollapsibleToolMenu :tools-by-category="tools" />
 
         <div class="footer">
+          <div mb-3 flex items-center justify-between border-b border-neutral-100 px-3 pb-3 dark:border-neutral-800>
+            <span text-xs text-neutral-500 font-medium>{{ $t('home.nav.mode') }}</span>
+            <NavbarButtons />
+          </div>
+
           <div class="text-xs text-neutral-400 dark:text-neutral-500">
             <span>IT-Tools v{{ version }}</span>
             <template v-if="commitSha && commitSha.length > 0">
@@ -114,8 +111,8 @@ watch(
         </div>
 
         <div flex items-center gap-2>
-          <locale-selector v-if="!styleStore.isSmallScreen" />
-          <NavbarButtons v-if="!styleStore.isSmallScreen" />
+          <locale-selector />
+          <NavbarButtons />
         </div>
       </div>
       <slot />
