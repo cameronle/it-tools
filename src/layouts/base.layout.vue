@@ -74,7 +74,7 @@ watch(
                 target="_blank"
                 rel="noopener"
                 type="primary"
-                :href="`https://github.com/CorentinTh/it-tools/tree/${commitSha}`"
+                :href="`https://github.com/cameronle/it-tools/tree/${commitSha}`"
               >
                 {{ commitSha }}
               </c-link>
