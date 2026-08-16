@@ -23,13 +23,15 @@ const theme = useTheme();
 .c-card {
   background-color: v-bind('theme.backgroundColor');
   border: 1px solid v-bind('theme.borderColor');
-  border-radius: 4px;
+  border-radius: 12px;
   padding: 20px 24px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
 
   &-title {
     font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
   }
 }
 </style>

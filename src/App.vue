@@ -34,6 +34,12 @@ syncRef(
 </template>
 
 <style>
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   min-height: 100%;
   margin: 0;
@@ -44,6 +50,10 @@ html {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+code, pre, kbd, samp {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 * {
