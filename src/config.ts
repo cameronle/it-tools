@@ -24,7 +24,9 @@ export const config = figue({
       doc: 'Application current env',
       format: 'enum',
       values: ['production', 'development', 'preview', 'test'],
-      default: 'development',
+      // Vercel provides VITE_VERCEL_ENV; Cloudflare Pages does not.
+      // Use a production-safe default for other static hosting providers.
+      default: import.meta.env.DEV ? 'development' : 'production',
       env: 'VITE_VERCEL_ENV',
     },
   },

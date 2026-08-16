@@ -17,6 +17,7 @@ import svgLoader from 'vite-svg-loader';
 import { configDefaults } from 'vitest/config';
 
 const baseUrl = process.env.BASE_URL ?? '/';
+const publicBaseUrl = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -61,7 +62,7 @@ export default defineConfig({
         description: 'Aggregated set of useful tools for developers.',
         display: 'standalone',
         lang: 'fr-FR',
-        start_url: `${baseUrl}?utm_source=pwa&utm_medium=pwa`,
+        start_url: `${publicBaseUrl}?utm_source=pwa&utm_medium=pwa`,
         orientation: 'any',
         theme_color: '#18a058',
         background_color: '#f1f5f9',
