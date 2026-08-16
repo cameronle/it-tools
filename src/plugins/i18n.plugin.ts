@@ -5,8 +5,9 @@ import { createI18n } from 'vue-i18n';
 
 function detectInitialLocale(): string {
   try {
+    const available = messages ? Object.keys(messages) : [];
     const saved = localStorage.getItem('locale');
-    if (saved && Object.keys(messages).includes(saved)) {
+    if (saved && available.includes(saved)) {
       return saved;
     }
 
@@ -15,7 +16,7 @@ function detectInitialLocale(): string {
       return 'zh';
     }
     const primary = browserLang.split('-')[0];
-    if (Object.keys(messages).includes(primary)) {
+    if (available.includes(primary)) {
       return primary;
     }
   }
