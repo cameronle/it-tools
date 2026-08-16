@@ -3,9 +3,9 @@ import { defineTool } from '../tool';
 import { translate } from '@/plugins/i18n.plugin';
 
 export const tool = defineTool({
-  name: translate('tools.curl-converter.title', 'cURL to Code Converter'),
+  name: translate('tools.curl-converter.title'),
   path: '/curl-converter',
-  description: translate('tools.curl-converter.description', 'Convert cURL commands to Python, JavaScript fetch, or Go code snippets.'),
+  description: translate('tools.curl-converter.description'),
   keywords: [
     'curl',
     'converter',
