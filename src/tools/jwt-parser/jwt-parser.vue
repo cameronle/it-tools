@@ -4,9 +4,17 @@ import { useValidation } from '@/composable/validation';
 import { isNotThrowing } from '@/utils/boolean';
 import { withDefaultOnError } from '@/utils/defaults';
 
-const rawJwt = ref(
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
-);
+const defaultJwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE5MTYyMzkwMjIsImFkbWluIjp0cnVlfQ.4S15e_2-sTj-k425n5l_45JdKk5f58L3M93L2D4sw5c';
+
+const rawJwt = ref(defaultJwt);
+
+function loadSample() {
+  rawJwt.value = defaultJwt;
+}
+
+function clearJwt() {
+  rawJwt.value = '';
+}
 
 const decodedJWT = computed(() =>
   withDefaultOnError(() => decodeJwt({ jwt: rawJwt.value }), { header: [], payload: [] }),
@@ -30,7 +38,20 @@ const validation = useValidation({
 
 <template>
   <c-card>
-    <c-input-text v-model:value="rawJwt" label="JWT to decode" :validation="validation" placeholder="Put your token here..." rows="5" multiline raw-text autofocus mb-3 />
+    <div mb-2 flex items-center justify-between>
+      <span text-sm text-neutral-600 font-medium dark:text-neutral-300>JWT to decode</span>
+      <div flex items-center gap-2>
+        <c-button size="small" variant="text" @click="loadSample">
+          <icon-mdi:flask-outline mr-1 />
+          Sample
+        </c-button>
+        <c-button size="small" variant="text" @click="clearJwt">
+          <icon-mdi:trash-can-outline mr-1 />
+          Clear
+        </c-button>
+      </div>
+    </div>
+    <c-input-text v-model:value="rawJwt" :validation="validation" placeholder="Put your token here..." rows="5" multiline raw-text autofocus mb-3 />
 
     <n-table v-if="validation.isValid">
       <tbody>
