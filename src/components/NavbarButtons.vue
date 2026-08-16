@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IconBrandGithub, IconDeviceDesktop, IconInfoCircle, IconMoon, IconSun } from '@tabler/icons-vue';
+import { IconDeviceDesktop, IconMoon, IconSun } from '@tabler/icons-vue';
 import { useStyleStore } from '@/stores/style.store';
 
 const styleStore = useStyleStore();
@@ -7,25 +7,6 @@ const { mode } = toRefs(styleStore);
 </script>
 
 <template>
-  <c-tooltip :tooltip="$t('home.nav.github')" position="bottom">
-    <c-button
-      circle
-      variant="text"
-      href="https://github.com/cameronle/it-tools"
-      target="_blank"
-      rel="noopener noreferrer"
-      :aria-label="$t('home.nav.githubRepository')"
-    >
-      <n-icon size="25" :component="IconBrandGithub" />
-    </c-button>
-  </c-tooltip>
-
-  <c-tooltip :tooltip="$t('home.nav.about')" position="bottom">
-    <c-button circle variant="text" to="/about" :aria-label="$t('home.nav.aboutLabel')">
-      <n-icon size="25" :component="IconInfoCircle" />
-    </c-button>
-  </c-tooltip>
-
   <c-tooltip
     :tooltip="
       mode === 'auto'
@@ -48,11 +29,3 @@ const { mode } = toRefs(styleStore);
     </c-button>
   </c-tooltip>
 </template>
-
-<style lang="less" scoped>
-.n-button {
-  &:not(:last-child) {
-    margin-right: 5px;
-  }
-}
-</style>
