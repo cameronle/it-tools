@@ -76,7 +76,8 @@ const toolAliases: Record<string, string[]> = {
   'mac-address-generator': ['mac地址生成', 'random mac'],
   'mac-address-lookup': ['mac厂商查询', 'oui lookup', 'mac vendor'],
   'random-port-generator': ['随机端口', '可用端口', 'random port'],
-  'crontab-generator': ['cron表达式', 'crontab', '定时任务'],
+  'crontab-generator': ['cron表达式', 'crontab', '定时任务', 'cron执行时间', 'cron forecast'],
+  'curl-converter': ['curl', 'curl转代码', 'curl to python', 'curl to fetch', 'curl to go', '接口转代码', 'http请求转换'],
   'text-diff': ['文本对比', '代码对比', 'diff', 'text compare'],
   'markdown-to-html': ['markdown转html', 'md to html'],
 };
