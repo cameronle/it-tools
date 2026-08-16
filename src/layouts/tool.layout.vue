@@ -6,8 +6,16 @@ import type { HeadObject } from '@vueuse/head';
 import BaseLayout from './base.layout.vue';
 import FavoriteButton from '@/components/FavoriteButton.vue';
 import type { Tool } from '@/tools/tools.types';
+import { useToolStore } from '@/tools/tools.store';
 
 const route = useRoute();
+const toolStore = useToolStore();
+
+onMounted(() => {
+  if (route.path) {
+    toolStore.recordRecentTool(route.path);
+  }
+});
 
 const head = computed<HeadObject>(() => ({
   title: `${route.meta.name} - IT Tools`,
