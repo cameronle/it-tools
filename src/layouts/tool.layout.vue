@@ -2,14 +2,26 @@
 import { useRoute } from 'vue-router';
 import { useHead } from '@vueuse/head';
 import type { HeadObject } from '@vueuse/head';
+import { useStorage } from '@vueuse/core';
+import { IconArrowsMaximize, IconArrowsMinimize } from '@tabler/icons-vue';
 
 import BaseLayout from './base.layout.vue';
 import FavoriteButton from '@/components/FavoriteButton.vue';
 import type { Tool } from '@/tools/tools.types';
 import { useToolStore } from '@/tools/tools.store';
+import { useStyleStore } from '@/stores/style.store';
 
 const route = useRoute();
 const toolStore = useToolStore();
+const styleStore = useStyleStore();
+const isZenMode = useStorage('tool-layout:is-zen-mode', false);
+
+function toggleZenMode() {
+  isZenMode.value = !isZenMode.value;
+  if (isZenMode.value) {
+    styleStore.isMenuCollapsed = true;
+  }
+}
 
 onMounted(() => {
   if (route.path) {
@@ -40,14 +52,27 @@ const toolDescription = computed<string>(() => t(`tools.${i18nKey.value}.descrip
 
 <template>
   <BaseLayout>
-    <div class="tool-layout">
+    <div class="tool-layout" :class="{ 'is-zen': isZenMode }">
       <div class="tool-header">
         <div flex items-center justify-between gap-4>
           <h1 class="tool-title">
             {{ toolTitle }}
           </h1>
 
-          <FavoriteButton :tool="{ name: route.meta.name, path: route.path } as Tool" />
+          <div flex items-center gap-2>
+            <c-tooltip :tooltip="isZenMode ? $t('home.exitZenMode', 'Exit Zen / Wide Mode') : $t('home.enterZenMode', 'Zen / Wide Mode')">
+              <c-button
+                circle
+                variant="text"
+                :class="{ 'text-emerald-500 bg-emerald-500/10 dark:bg-emerald-500/20': isZenMode }"
+                @click="toggleZenMode"
+              >
+                <n-icon size="18" :component="isZenMode ? IconArrowsMinimize : IconArrowsMaximize" />
+              </c-button>
+            </c-tooltip>
+
+            <FavoriteButton :tool="{ name: route.meta.name, path: route.path } as Tool" />
+          </div>
         </div>
 
         <div class="tool-description">
@@ -68,6 +93,12 @@ const toolDescription = computed<string>(() => t(`tools.${i18nKey.value}.descrip
   margin: 0 auto;
   padding: 0 12px;
   box-sizing: border-box;
+  transition: max-width 0.25s ease;
+
+  &.is-zen {
+    max-width: 100%;
+    padding: 0 20px;
+  }
 
   .tool-header {
     padding: 24px 0 20px;

@@ -147,10 +147,46 @@ function formatDateUsingFormatter(formatter: (date: Date) => string, date?: Date
 
   return withDefaultOnError(() => formatter(date), '');
 }
+function setNow() {
+  const currentDate = new Date();
+  inputDate.value = String(getUnixTime(currentDate));
+  formatIndex.value = 5; // Unix timestamp
+}
+
+function setNowIso() {
+  const currentDate = new Date();
+  inputDate.value = formatISO(currentDate);
+  formatIndex.value = 1; // ISO 8601
+}
 </script>
 
 <template>
-  <div>
+  <div max-w-750px w-full>
+    <div mb-3 flex flex-wrap items-center justify-between gap-2>
+      <div flex items-center gap-2>
+        <span text-xs text-neutral-400 font-medium>Quick set:</span>
+        <button
+          class="cursor-pointer border border-neutral-200 rounded-md bg-neutral-100 px-2 py-1 text-xs text-neutral-700 font-medium transition-colors dark:border-neutral-800 hover:border-emerald-500/50 dark:bg-neutral-800/80 hover:bg-emerald-50 dark:text-neutral-300 hover:text-emerald-600 dark:hover:bg-emerald-950/30 dark:hover:text-emerald-400"
+          @click="setNow"
+        >
+          <icon-mdi:clock-fast mr-1 inline />
+          Now (Unix Sec)
+        </button>
+        <button
+          class="cursor-pointer border border-neutral-200 rounded-md bg-neutral-100 px-2 py-1 text-xs text-neutral-700 font-medium transition-colors dark:border-neutral-800 hover:border-emerald-500/50 dark:bg-neutral-800/80 hover:bg-emerald-50 dark:text-neutral-300 hover:text-emerald-600 dark:hover:bg-emerald-950/30 dark:hover:text-emerald-400"
+          @click="setNowIso"
+        >
+          <icon-mdi:calendar-clock mr-1 inline />
+          Now (ISO)
+        </button>
+      </div>
+
+      <c-button size="small" variant="text" @click="inputDate = ''">
+        <icon-mdi:trash-can-outline mr-1 />
+        Clear
+      </c-button>
+    </div>
+
     <div flex gap-2>
       <c-input-text
         v-model:value="inputDate"

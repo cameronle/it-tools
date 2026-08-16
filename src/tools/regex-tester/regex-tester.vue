@@ -60,13 +60,72 @@ const results = computed(() => {
 
 const sample = computed(() => {
   try {
-    const randexp = new RandExp(new RegExp(regex.value.replace(/\(\?\<[^\>]*\>/g, '(?:')));
+    const randexp = new RandExp(new RegExp(regex.value.replace(/(\?<[^>]*>)/g, '(?:')));
     return randexp.gen();
   }
   catch (_) {
     return '';
   }
 });
+
+interface RegexPreset {
+  label: string
+  pattern: string
+  sampleText: string
+  flags?: { global?: boolean; ignoreCase?: boolean; multiline?: boolean }
+}
+
+const presets: RegexPreset[] = [
+  {
+    label: 'Email',
+    pattern: '^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$',
+    sampleText: 'contact@example.com, invalid.email@, user.name+tag@sub.domain.co',
+    flags: { global: true, ignoreCase: true },
+  },
+  {
+    label: 'URL',
+    pattern: 'https?:\\/\\/[\\w.-]+(?:\\:[0-9]+)?(?:\\/[^\\s]*)?',
+    sampleText: 'Visit https://tools.865455.xyz/ or http://localhost:8080/api/v1?page=1 for details.',
+    flags: { global: true, ignoreCase: true },
+  },
+  {
+    label: 'IPv4',
+    pattern: '\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\b',
+    sampleText: 'Server IP: 192.168.1.1, gateway: 10.0.0.254, invalid: 999.1.1.1',
+    flags: { global: true },
+  },
+  {
+    label: 'Date (YYYY-MM-DD)',
+    pattern: '\\b(\\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])\\b',
+    sampleText: 'Start: 2026-08-16, End: 2026-12-31, Invalid: 2026-02-30',
+    flags: { global: true },
+  },
+  {
+    label: 'Phone (CN)',
+    pattern: '\\b1[3-9]\\d{9}\\b',
+    sampleText: 'Call 13800138000 or 18612345678, not 12345678901',
+    flags: { global: true },
+  },
+];
+
+function applyPreset(preset: RegexPreset) {
+  regex.value = preset.pattern;
+  text.value = preset.sampleText;
+  if (preset.flags?.global !== undefined) {
+    global.value = preset.flags.global;
+  }
+  if (preset.flags?.ignoreCase !== undefined) {
+    ignoreCase.value = preset.flags.ignoreCase;
+  }
+  if (preset.flags?.multiline !== undefined) {
+    multiline.value = preset.flags.multiline;
+  }
+}
+
+function clearAll() {
+  regex.value = '';
+  text.value = '';
+}
 
 watchEffect(
   async () => {
@@ -91,7 +150,27 @@ watchEffect(
 </script>
 
 <template>
-  <div max-w-600px>
+  <div max-w-700px w-full>
+    <!-- Preset Pills -->
+    <div mb-3 flex flex-wrap items-center justify-between gap-2>
+      <div flex flex-wrap items-center gap-1.5>
+        <span mr-1 text-xs text-neutral-400 font-medium>Presets:</span>
+        <button
+          v-for="p in presets"
+          :key="p.label"
+          class="cursor-pointer border border-neutral-200 rounded-md bg-neutral-100 px-2 py-1 text-xs text-neutral-600 font-medium transition-colors dark:border-neutral-800 hover:border-emerald-500/50 dark:bg-neutral-800/80 hover:bg-emerald-50 dark:text-neutral-300 hover:text-emerald-600 dark:hover:bg-emerald-950/30 dark:hover:text-emerald-400"
+          @click="applyPreset(p)"
+        >
+          {{ p.label }}
+        </button>
+      </div>
+
+      <c-button size="small" variant="text" @click="clearAll">
+        <icon-mdi:trash-can-outline mr-1 />
+        Clear
+      </c-button>
+    </div>
+
     <c-card title="Regex" mb-1>
       <c-input-text
         v-model:value="regex"
@@ -101,24 +180,26 @@ watchEffect(
         rows="3"
         :validation="regexValidation"
       />
-      <router-link target="_blank" to="/regex-memo" mb-1 mt-1>
-        See Regular Expression Cheatsheet
-      </router-link>
+      <div my-2 flex items-center justify-between>
+        <router-link target="_blank" to="/regex-memo" class="text-xs text-emerald-600 dark:text-emerald-400 hover:underline">
+          See Regular Expression Cheatsheet →
+        </router-link>
+      </div>
       <n-space>
         <n-checkbox v-model:checked="global">
-          <span title="Global search">Global search. (<code>g</code>)</span>
+          <span title="Global search">Global (<code>g</code>)</span>
         </n-checkbox>
         <n-checkbox v-model:checked="ignoreCase">
-          <span title="Case-insensitive search">Case-insensitive search. (<code>i</code>)</span>
+          <span title="Case-insensitive search">Case-insensitive (<code>i</code>)</span>
         </n-checkbox>
         <n-checkbox v-model:checked="multiline">
-          <span title="Allows ^ and $ to match next to newline characters.">Multiline(<code>m</code>)</span>
+          <span title="Allows ^ and $ to match next to newline characters.">Multiline (<code>m</code>)</span>
         </n-checkbox>
         <n-checkbox v-model:checked="dotAll">
-          <span title="Allows . to match newline characters.">Singleline(<code>s</code>)</span>
+          <span title="Allows . to match newline characters.">Singleline (<code>s</code>)</span>
         </n-checkbox>
         <n-checkbox v-model:checked="unicode">
-          <span title="Unicode; treat a pattern as a sequence of Unicode code points.">Unicode(<code>u</code>)</span>
+          <span title="Unicode; treat a pattern as a sequence of Unicode code points.">Unicode (<code>u</code>)</span>
         </n-checkbox>
         <n-checkbox v-model:checked="unicodeSets">
           <span title="An upgrade to the u mode with more Unicode features.">Unicode Sets (<code>v</code>)</span>

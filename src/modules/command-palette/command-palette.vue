@@ -140,7 +140,7 @@ function activateOption(option: PaletteOption) {
 
       <div class="no-scrollbar mt-3 max-h-60vh overflow-y-auto">
         <div v-for="(options, category) in filteredSearchResult" :key="category" class="mb-2">
-          <div class="mb-1 ml-2 text-11px font-bold tracking-wider text-emerald-500 uppercase op-80">
+          <div class="mb-1 ml-2 text-11px text-emerald-500 font-bold tracking-wider uppercase op-80">
             {{ category }}
           </div>
           <command-palette-option

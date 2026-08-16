@@ -54,14 +54,22 @@ const tooltipText = computed(() => isJustCopied.value ? 'Copied!' : copyMessage.
       </n-scrollbar>
       <div absolute right-10px top-10px>
         <c-tooltip v-if="value" :tooltip="tooltipText" position="left">
-          <c-button circle important:h-10 important:w-10 @click="copy()">
-            <n-icon size="22" :component="Copy" />
+          <c-button
+            circle
+            important:h-9
+            important:w-9
+            :class="isJustCopied ? '!bg-emerald-500/10 dark:!bg-emerald-500/20 !text-emerald-500 !border-emerald-500/30' : ''"
+            @click="copy()"
+          >
+            <icon-mdi-check v-if="isJustCopied" text-18px />
+            <n-icon v-else size="18" :component="Copy" />
           </c-button>
         </c-tooltip>
       </div>
     </c-card>
     <div v-if="copyPlacement === 'outside'" mt-4 flex justify-center>
-      <c-button @click="copy()">
+      <c-button :class="isJustCopied ? '!text-emerald-500' : ''" @click="copy()">
+        <icon-mdi-check v-if="isJustCopied" mr-1 />
         {{ tooltipText }}
       </c-button>
     </div>
