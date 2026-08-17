@@ -74,28 +74,6 @@ import { expect, describe, it } from 'vitest';
 `,
 );
 
-createToolFile(
-  `${toolName}.e2e.spec.ts`,
-  `
-import { test, expect } from '@playwright/test';
-
-test.describe('Tool - ${toolNameTitleCase}', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('/${toolName}');
-  });
-
-  test('Has correct title', async ({ page }) => {
-    await expect(page).toHaveTitle('${toolNameTitleCase} - IT Tools');
-  });
-
-  test('', async ({ page }) => {
-
-  });
-});
-  
-`,
-);
-
 const toolsIndex = join(toolsDir, 'index.ts');
 const indexContent = await readFile(toolsIndex, { encoding: 'utf-8' }).then((r) => r.split('\n'));
 
