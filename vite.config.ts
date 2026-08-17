@@ -14,7 +14,6 @@ import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import markdown from 'vite-plugin-vue-markdown';
 import svgLoader from 'vite-svg-loader';
-import { configDefaults } from 'vitest/config';
 
 const baseUrl = process.env.BASE_URL ?? '/';
 const publicBaseUrl = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
@@ -112,9 +111,6 @@ export default defineConfig({
   },
   define: {
     'import.meta.env.PACKAGE_VERSION': JSON.stringify(process.env.npm_package_version),
-  },
-  test: {
-    exclude: [...configDefaults.exclude, '**/*.e2e.spec.ts'],
   },
   build: {
     target: 'esnext',
