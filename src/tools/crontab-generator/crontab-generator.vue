@@ -345,7 +345,7 @@ function toggleMonthlyDay(day: number) {
 
       <!-- Visual Mode Tabs -->
       <div mb-4>
-        <div class="flex items-center gap-1.5 overflow-x-auto border-b border-neutral-100 pb-2 dark:border-neutral-800">
+        <div class="flex items-center gap-1.5 overflow-x-auto border-b border-neutral-100/70 pb-2 dark:border-neutral-800/70">
           <button
             v-for="mode in [
               { id: 'presets', label: cronLanguage === 'zh_CN' ? '常用预设' : 'Presets', icon: 'mdi:bookmark-outline' },

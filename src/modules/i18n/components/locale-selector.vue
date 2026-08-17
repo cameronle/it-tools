@@ -4,21 +4,15 @@ const { availableLocales, locale } = useI18n();
 const localesLong: Record<string, string> = {
   en: 'English',
   zh: '中文',
-  de: 'Deutsch',
-  es: 'Español',
-  fr: 'Français',
-  no: 'Norwegian',
-  pt: 'Português',
-  ru: 'Русский',
-  uk: 'Українська',
-  vi: 'Tiếng Việt',
 };
 
 const dropdownOptions = computed(() =>
-  availableLocales.map(key => ({
-    label: localesLong[key] ?? key,
-    key,
-  })),
+  availableLocales
+    .filter(key => key === 'en' || key === 'zh')
+    .map(key => ({
+      label: localesLong[key],
+      key,
+    })),
 );
 
 function handleSelect(key: string) {
