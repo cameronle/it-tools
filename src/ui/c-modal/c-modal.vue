@@ -10,18 +10,20 @@ const props = withDefaults(defineProps<{
   centered?: boolean
   overlayClass?: string
   teleport?: boolean
+  animated?: boolean
 }>(), {
   open: false,
   centered: true,
   overlayClass: '',
   teleport: true,
+  animated: true,
 });
 
 const emit = defineEmits(['update:open']);
 
 const isOpen = useVModel(props, 'open', emit, { passive: true });
 
-const { centered, overlayClass, teleport } = toRefs(props);
+const { animated, centered, overlayClass, teleport } = toRefs(props);
 
 function close() {
   isOpen.value = false;
@@ -54,7 +56,7 @@ onClickOutside(modal, () => {
 
 <template>
   <Teleport to="body" :disabled="!teleport">
-    <transition name="modal-fade">
+    <transition name="modal-fade" :css="animated" :duration="animated ? 200 : 0">
       <div
         v-if="isOpen"
         class="c-modal--overlay"
@@ -108,6 +110,10 @@ onClickOutside(modal, () => {
 .modal-fade-enter-active,
 .modal-fade-leave-active {
   transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.modal-fade-leave-active {
+  pointer-events: none;
 }
 
 .modal-fade-enter-from,

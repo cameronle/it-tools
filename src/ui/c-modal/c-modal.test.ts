@@ -33,4 +33,23 @@ describe('CModal', () => {
     expect(container?.classList.contains('c-modal--container--top')).toBe(true);
     expect((container as HTMLElement | null)?.style.backgroundColor).toBe('rgb(255, 255, 255)');
   });
+
+  it('removes its teleported overlay immediately when animation is disabled', async () => {
+    wrapper = mount(CModal, {
+      attachTo: document.body,
+      global: {
+        plugins: [createPinia()],
+      },
+      props: {
+        open: true,
+        animated: false,
+      },
+    });
+
+    expect(document.body.querySelector('.c-modal--overlay')).not.toBeNull();
+
+    await wrapper.setProps({ open: false });
+
+    expect(document.body.querySelector('.c-modal--overlay')).toBeNull();
+  });
 });

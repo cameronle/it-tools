@@ -209,6 +209,7 @@ function activateOption(option?: PaletteOption) {
 
     <c-modal
       v-model:open="isModalOpen"
+      :animated="false"
       :centered="false"
       class="palette-modal"
       overlay-class="palette-overlay"
