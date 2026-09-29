@@ -62,6 +62,14 @@ toolCard:
   new: '新'
 search:
   label: '搜索'
+  dialogLabel: '搜索工具和命令'
+  placeholder: '搜索工具或命令...'
+  suggested: '推荐工具'
+  close: '关闭搜索'
+  noResults: '没有匹配的工具或命令'
+  noResultsHint: '试试工具名称、操作或关键词。'
+  navigate: '选择'
+  open: '打开'
 tools:
   categories:
     favorite-tools: '我的收藏'

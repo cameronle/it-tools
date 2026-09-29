@@ -62,6 +62,14 @@ toolCard:
   new: New
 search:
   label: Search
+  dialogLabel: 'Search tools and commands'
+  placeholder: 'Search tools and commands...'
+  suggested: Suggested
+  close: 'Close search'
+  noResults: 'No matching tools or commands'
+  noResultsHint: 'Try a tool name, action, or keyword.'
+  navigate: Navigate
+  open: Open
 tools:
   categories:
     favorite-tools: 'Your favorite tools'

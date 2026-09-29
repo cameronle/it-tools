@@ -60,7 +60,13 @@ onClickOutside(modal, () => {
         class="c-modal--overlay"
         :class="[{ 'items-center': centered }, overlayClass]"
       >
-        <div ref="modal" class="c-modal--container" v-bind="$attrs">
+        <div
+          ref="modal"
+          class="c-modal--container"
+          :class="{ 'c-modal--container--top': !centered }"
+          :style="{ backgroundColor: theme.background }"
+          v-bind="$attrs"
+        >
           <slot />
         </div>
       </div>
@@ -85,7 +91,7 @@ onClickOutside(modal, () => {
 }
 
 .c-modal--container {
-  background-color: v-bind('theme.background');
+  background-color: #fff;
   border: 1px solid rgba(128, 128, 128, 0.15);
   border-radius: 12px;
   padding: 20px;
@@ -93,6 +99,10 @@ onClickOutside(modal, () => {
   width: 100%;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
   margin: auto 0;
+
+  &.c-modal--container--top {
+    margin: 0;
+  }
 }
 
 .modal-fade-enter-active,
